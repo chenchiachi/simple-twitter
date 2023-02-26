@@ -1,7 +1,15 @@
+import "./reset.module.scss";
+import "./base.module.scss";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AdminLoginPage } from "./pages";
 function App() {
   return (
-    <div >
-      hello
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="admin_login" element={<AdminLoginPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
