@@ -3,10 +3,25 @@ import { Link } from "react-router-dom";
 import { ACLogoIcon } from "../assets";
 import styles from "../styles/adminLoginPage.module.scss";
 import AuthInput from "../components/AuthInput";
+import { adminLogin } from "../api/auth";
 
 const AdminLoginPage = () => {
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleClick = async () => {
+    if (account.length === 0) return;
+    if (password.length === 0) return;
+
+    const data = await adminLogin({
+      account,
+      password,
+    });
+    const token = data.data.token;
+    if (data.success) {
+      localStorage.setItem("authToken", token);
+    }
+  };
 
   return (
     <div className="container">
@@ -27,7 +42,9 @@ const AdminLoginPage = () => {
         value={password}
         onChange={(inputValue) => setPassword(inputValue)}
       />
-      <button className={styles.button}>Login</button>
+      <button className={styles.button} onClick={handleClick}>
+        Login
+      </button>
       <Link to="/" className={`${styles["link-container"]}`}>
         <p className={styles.link}>前台登入</p>
       </Link>
