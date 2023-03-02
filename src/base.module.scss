@@ -27,3 +27,26 @@
   --dark-30: #f1f1f5;
   --dark-20: #fafafb;
 }
+
+:global {
+  .swal2-container.swal2-top > .swal2-popup,
+  .swal2-container.swal2-top > .swal2-popup {
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    grid-template-areas: "title title icon" !important;
+    .swal2-icon {
+      grid-area: icon !important;
+    }
+    .swal2-title {
+      grid-area: title !important;
+    }
+  }
+
+  @media screen and (min-width: 576px) {
+    body.swal2-toast-shown .swal2-container.swal2-top {
+      right: 0 !important;
+      left: auto !important;
+      transform: unset!important;
+    }
+  }
+}

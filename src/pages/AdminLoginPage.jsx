@@ -4,6 +4,7 @@ import { ACLogoIcon } from "../assets";
 import styles from "../styles/adminLoginPage.module.scss";
 import AuthInput from "../components/AuthInput";
 import { adminLogin } from "../api/auth";
+import { Toast } from "../utilities/sweetalert";
 
 const AdminLoginPage = () => {
   const [account, setAccount] = useState("");
@@ -13,13 +14,25 @@ const AdminLoginPage = () => {
     if (account.length === 0) return;
     if (password.length === 0) return;
 
-    const data = await adminLogin({
+    const { data }= await adminLogin({
       account,
       password,
     });
     const token = data.data.token;
     if (data.success) {
       localStorage.setItem("authToken", token);
+      Toast.fire({
+        icon: "success",
+        title: "Login Success!",
+      });
+      return;
+    } else {
+      Toast.fire({
+        icon: "error",
+        title: "Login Failed!",
+      });
+      setAccount("")
+      setPassword("")
     }
   };
 

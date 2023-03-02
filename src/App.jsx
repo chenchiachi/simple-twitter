@@ -8,6 +8,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="admin_login" element={<AdminLoginPage />} />
+          <Route path="/" element={<AdminLoginPage />} />
         </Routes>
       </BrowserRouter>
     </div>
